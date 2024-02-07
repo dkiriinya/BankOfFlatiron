@@ -3,16 +3,26 @@ import './App.css';
 import SearchBar from './components/SearchBar';
 import TransactionTable from './components/TransactionTable';
 import AddTransactionForm from './components/AddTransactionForm';
+import EditedTransactionForm from './components/EditedTransactionForm';
 import { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect } from 'react';
 
 function App() {
+  const [isEditFormVisible ,setIsEditFormVisible] = useState(false)
   // state to hold transactions 
   const [transactions, setTransactions] = useState([]);
   //using a copy of the search value
   const [term,setTerm] = useState('');
   const [sortType, setSortType] = useState(null); 
+  const [editedTransaction, seteditedTransaction] = useState({
+    id: '',
+    description: '',
+    amount: 0,
+    date: '',
+    category: ''
+  })
+  
 
 
   // as the component mounts , this will run initially 
@@ -20,6 +30,24 @@ function App() {
   {
       fetchTransaction();
   }, []);
+
+  const handleEdit = async (id) => {
+    try {
+      console.log('Attempting to fetch transaction details for editing');
+      const response = await fetch(`http://localhost:8001/transactions/${id}`);
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Fetched transaction details:', data);
+        seteditedTransaction(data);
+        setIsEditFormVisible(true); 
+      } else {
+        console.log('Error fetching transaction details for editing', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error fetching transaction details for editing', error);
+    }
+  };
+  
 
 
   const fetchTransaction = async () => {
@@ -79,6 +107,8 @@ function App() {
     }catch(error) {
       console.error("error deleting transaction " , error)
     }
+
+  
 }
 
 //sort function 
@@ -117,8 +147,16 @@ const handleSort = (type) => {
         <button  style={{
           margin: 10
         }} className='btn btn-primary' onClick={() => handleSort('description')}>Sort by Description</button>
-        <TransactionTable transactions={filteredTransactions} onDelete={handleDelete}/>
+        <TransactionTable transactions={filteredTransactions} onDelete={handleDelete} onEdit={handleEdit}/>
         <AddTransactionForm onAdd={addTransaction}/>
+        {isEditFormVisible && (
+          <EditedTransactionForm
+          editedTransaction={editedTransaction}
+          fetchTransaction={fetchTransaction}
+          setIsEditFormVisible={setIsEditFormVisible}
+        />
+
+        )}
     </div>
   );
 }

@@ -1,10 +1,14 @@
 import React from "react"
 import '../../src/App.css'
 import { Table } from "react-bootstrap"
-export default function TransactionTable({transactions, onDelete}){
+export default function TransactionTable({transactions, onDelete, onEdit}){
 
    const handleDelete = (id) => {
           onDelete(id)
+   }
+
+   const handleEdit = (id) => {
+      onEdit(id)
    }
     return (
        <>

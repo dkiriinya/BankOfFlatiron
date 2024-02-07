@@ -2,10 +2,10 @@
   "transactions": [
     {
       "id": 2,
-      "date": "2019-12-01",
-      "description": "South by Southwest Quinoa Bowl at Fresh & Co",
-      "category": "Food",
-      "amount": -10.55
+      "date": "2024-01-31",
+      "description": "south by virginia(paycheck)",
+      "category": "Income",
+      "amount": "50"
     },
     {
       "id": 3,
@@ -20,13 +20,6 @@
       "description": "Venmo, Alice Pays you for Burrito",
       "category": "Food",
       "amount": 8.75
-    },
-    {
-      "id": 7,
-      "date": "2019-12-07",
-      "description": "Birthday Check from Grandma",
-      "category": "Gift",
-      "amount": 50
     },
     {
       "id": 8,
