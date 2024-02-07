@@ -4,6 +4,8 @@ import SearchBar from './components/SearchBar';
 import TransactionTable from './components/TransactionTable';
 import AddTransactionForm from './components/AddTransactionForm';
 import EditedTransactionForm from './components/EditedTransactionForm';
+import About from './components/About';
+import Navbar from './components/Navbar';
 import { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect } from 'react';
@@ -135,6 +137,7 @@ const handleSort = (type) => {
 
   return (
     <div className="App">
+        <Navbar />
         <h2>Bank Of FlatIron</h2>
         <SearchBar onSearch={handleSearch} />
         <br></br>
@@ -149,6 +152,7 @@ const handleSort = (type) => {
         }} className='btn btn-primary' onClick={() => handleSort('description')}>Sort by Description</button>
         <TransactionTable transactions={filteredTransactions} onDelete={handleDelete} onEdit={handleEdit}/>
         <AddTransactionForm onAdd={addTransaction}/>
+        <About />
         {isEditFormVisible && (
           <EditedTransactionForm
           editedTransaction={editedTransaction}
