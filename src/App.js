@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import { Route,Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import SearchBar from './components/SearchBar';
 import TransactionTable from './components/TransactionTable';
 import AddTransactionForm from './components/AddTransactionForm';
@@ -138,29 +139,40 @@ const handleSort = (type) => {
   return (
     <div className="App">
         <Navbar />
-        <h2>Bank Of FlatIron</h2>
-        <SearchBar onSearch={handleSearch} />
-        <br></br>
-        <button style={{
-          margin: 10
-        }} className='btn btn-primary' onClick={() => handleSort(null)}>Clear Sort</button>
-        <button  style={{
-          margin: 10
-        }} className='btn btn-primary' onClick={() => handleSort('category')}>Sort by Category</button>
-        <button  style={{
-          margin: 10
-        }} className='btn btn-primary' onClick={() => handleSort('description')}>Sort by Description</button>
-        <TransactionTable transactions={filteredTransactions} onDelete={handleDelete} onEdit={handleEdit}/>
-        <AddTransactionForm onAdd={addTransaction}/>
-        <About />
-        {isEditFormVisible && (
-          <EditedTransactionForm
-          editedTransaction={editedTransaction}
-          fetchTransaction={fetchTransaction}
-          setIsEditFormVisible={setIsEditFormVisible}
-        />
-
-        )}
+        <Switch>
+          <Route path='/about'><About /></Route>
+          <Route path='/add-transaction'>
+            <AddTransactionForm onAdd={addTransaction}/>
+          </Route>
+          <Route path='/'>
+            <div>
+            <h2>Bank Of FlatIron</h2>
+            <SearchBar onSearch={handleSearch} />
+            <br></br>
+            <button style={{
+              margin: 10
+            }} className='btn btn-primary' onClick={() => handleSort(null)}>Clear Sort</button>
+            <button  style={{
+              margin: 10
+            }} className='btn btn-primary' onClick={() => handleSort('category')}>Sort by Category</button>
+            <button  style={{
+              margin: 10
+            }} className='btn btn-primary' onClick={() => handleSort('description')}>Sort by Description</button>
+            <TransactionTable transactions={filteredTransactions} onDelete={handleDelete} onEdit={handleEdit}/>
+            {isEditFormVisible && (
+              <EditedTransactionForm
+              editedTransaction={editedTransaction}
+              fetchTransaction={fetchTransaction}
+              setIsEditFormVisible={setIsEditFormVisible}
+            />
+    
+            )}
+              
+            </div>
+          </Route>
+          
+          </Switch>
+       
     </div>
   );
 }

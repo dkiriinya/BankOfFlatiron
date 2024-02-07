@@ -41,6 +41,13 @@
       "date": "2024-02-13",
       "category": "Movie",
       "id": 10
+    },
+    {
+      "description": "m-pesa from joseph",
+      "amount": "343",
+      "date": "2024-02-08",
+      "category": "Income",
+      "id": 11
     }
   ]
 }

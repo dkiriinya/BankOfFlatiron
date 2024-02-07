@@ -1,8 +1,8 @@
 import React from "react";
-import { NavLink } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
-  const navbarLinks = ['Home', 'About', 'Add Transaction Form'];
+  const navbarLinks = ['', 'about', 'add-transaction'];
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -10,7 +10,7 @@ export default function Navbar() {
         {navbarLinks.map((link) => (
           <li key={link} className="nav-item">
             <NavLink to={`/${link}`} className="nav-link">
-              {link}
+              {link === '' ? 'Home' : link}
             </NavLink>
           </li>
         ))}
