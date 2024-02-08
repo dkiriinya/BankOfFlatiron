@@ -16,16 +16,19 @@ export default function SearchBar({onSearch}){
 
     return (
        <>
-         <div>
-          <label htmlFor="search">Search:</label>
-          <input
-          type="text"
-          id="search"
-          value={searchTerm}
-          onChange={handleInputChange}    
-          placeholder="Search Description"      
-          />
-         </div>
+       <div className="mb-3 container">
+       <label htmlFor="search" className="form-label">
+         Search Transactions:
+       </label>
+       <input
+         type="text"
+         className="form-control"
+         id="search"
+         value={searchTerm}
+         onChange={handleInputChange}
+         placeholder="Type to search..."
+       />
+     </div>
        </>
     )
 }

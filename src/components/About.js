@@ -2,7 +2,7 @@ import React from "react";
 
 export default function About(){
     return(
-        <div>
+        <div className="mb3 container">
           <article>
             <div>
               <h1>Welcome to Flatiron Bank

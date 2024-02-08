@@ -38,29 +38,58 @@ export default function EditedTransactionForm({ editedTransaction, fetchTransact
   };
 
   return (
-    <div>
-      <h3>Edit Transaction</h3>
-      <form>
-        <div>
-          <label htmlFor="description">Description:</label>
-          <input type="text" id="description" name="description" value={editedData.description} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label htmlFor="amount">Amount:</label>
-          <input type="number" id="amount" name="amount" value={editedData.amount} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label htmlFor="date">Date:</label>
-          <input type="text" id="date" name="date" value={editedData.date} onChange={handleInputChange} />
-        </div>
-        <div>
-          <label htmlFor="category">Category:</label>
-          <input type="text" id="category" name="category" value={editedData.category} onChange={handleInputChange} />
-        </div>
-        <button type="button" onClick={handleUpdate} className="btn btn-success">
-          Update Transaction
-        </button>
-      </form>
+    <div className="container">
+  <h3>Edit Transaction</h3>
+  <form>
+    <div className="form-group">
+      <label htmlFor="description">Description:</label>
+      <input
+        type="text"
+        id="description"
+        name="description"
+        value={editedData.description}
+        onChange={handleInputChange}
+        className="form-control"
+      />
     </div>
+    <div className="form-group">
+      <label htmlFor="amount">Amount:</label>
+      <input
+        type="number"
+        id="amount"
+        name="amount"
+        value={editedData.amount}
+        onChange={handleInputChange}
+        className="form-control"
+      />
+    </div>
+    <div className="form-group">
+      <label htmlFor="date">Date:</label>
+      <input
+        type="date"
+        id="date"
+        name="date"
+        value={editedData.date}
+        onChange={handleInputChange}
+        className="form-control"
+      />
+    </div>
+    <div className="form-group">
+      <label htmlFor="category">Category:</label>
+      <input
+        type="text"
+        id="category"
+        name="category"
+        value={editedData.category}
+        onChange={handleInputChange}
+        className="form-control"
+      />
+    </div>
+    <button type="button" onClick={handleUpdate} className="btn btn-success">
+      Update Transaction
+    </button>
+  </form>
+</div>
+
   );
 }

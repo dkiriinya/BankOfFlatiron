@@ -115,26 +115,23 @@ function App() {
 }
 
 //sort function 
-const handleSort = (type) => {
-   if(sortType === type){
-         setSortType(null);
-   } else {
-    setSortType(type);
-    // making a copy of the transactions array to be used for sorting purposes as per the type 
-    const sortedTransactions = [...transactions]
-
-    if(type === 'category'){
-       sortedTransactions.sort((a,b) => a.category.localeCompare(b.category));
-    } else if(type === 'description'){
-      sortedTransactions.sort((a,b) => a.description.localeCompare(b.description));
+const handleSort = (sortBy) => {
+  const sortedTransactions = [...transactions]
+  sortedTransactions.sort((a,b)=> {
+    if(sortBy === 'category') {
+      return a.category.localeCompare(b.category);
+    }else if(sortBy === 'description') {
+      return a.description.localeCompare(b.description)
     }
+    return 0
+  });
+   
+    setSortType(sortBy);
+    // making a copy of the transactions array to be used for sorting purposes as per the type 
+    
     setTransactions(sortedTransactions)
 
    }
-
-
-}
-
 
   return (
     <div className="App">
@@ -142,11 +139,11 @@ const handleSort = (type) => {
         <Switch>
           <Route path='/about'><About /></Route>
           <Route path='/add-transaction'>
-            <AddTransactionForm onAdd={addTransaction}/>
+            <AddTransactionForm  onAdd={addTransaction}/>
           </Route>
           <Route path='/'>
             <div>
-            <h2>Bank Of FlatIron</h2>
+            <h2 className='mb3'>Bank Of Flatiron</h2>
             <SearchBar onSearch={handleSearch} />
             <br></br>
             <button style={{

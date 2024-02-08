@@ -23,7 +23,7 @@ export default function AddTransactionForm({onAdd}){
   }
      return (
         <>
-          <div className="container">
+          <div className="container mb3">
             <h2>Add Transaction</h2>
             <form className="form-control" onSubmit={handleSubmit}>
                 <label htmlFor="description">Description</label>
