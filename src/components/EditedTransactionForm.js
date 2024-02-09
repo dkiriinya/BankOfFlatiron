@@ -41,7 +41,7 @@ export default function EditedTransactionForm({ editedTransaction, fetchTransact
     <div className="container">
   <h3>Edit Transaction</h3>
   <form>
-    <div className="form-group">
+    <div className="form-group" >
       <label htmlFor="description">Description:</label>
       <input
         type="text"

@@ -1,6 +1,8 @@
 import { useState } from "react"
+import { useHistory } from "react-router-dom";
 
 export default function AddTransactionForm({onAdd}){
+  const history = useHistory()
 
   const [newTransaction, setNewTransaction] = useState({
       description: '',
@@ -20,6 +22,11 @@ export default function AddTransactionForm({onAdd}){
        onAdd(newTransaction);
        // resetting the input box
        setNewTransaction({description: '' , amount: '' , date: '' , category: ''})
+    
+      // Delay the navigation for 500 milliseconds (adjust as needed)
+      history.push("/", { fromAddTransaction: true });
+      alert('Transaction added successfully!');
+
   }
      return (
         <>

@@ -10,14 +10,17 @@ import Navbar from './components/Navbar';
 import { useState } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 function App() {
+  const location = useLocation();
   const [isEditFormVisible ,setIsEditFormVisible] = useState(false)
   // state to hold transactions 
   const [transactions, setTransactions] = useState([]);
   //using a copy of the search value
   const [term,setTerm] = useState('');
   const [sortType, setSortType] = useState(null); 
+  
   const [editedTransaction, seteditedTransaction] = useState({
     id: '',
     description: '',
@@ -34,6 +37,16 @@ function App() {
       fetchTransaction();
   }, []);
 
+  useEffect(() => {
+    if (location.state && location.state.fromAddTransaction) {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+      });
+    }
+  }, [location.state, location.pathname]);
+
+
   const handleEdit = async (id) => {
     try {
       console.log('Attempting to fetch transaction details for editing');
@@ -43,6 +56,13 @@ function App() {
         console.log('Fetched transaction details:', data);
         seteditedTransaction(data);
         setIsEditFormVisible(true); 
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+
       } else {
         console.log('Error fetching transaction details for editing', response.statusText);
       }
@@ -142,7 +162,7 @@ const handleSort = (sortBy) => {
             <AddTransactionForm  onAdd={addTransaction}/>
           </Route>
           <Route path='/'>
-            <div>
+            <div>   
             <h2 className='mb3'>Bank Of Flatiron</h2>
             <SearchBar onSearch={handleSearch} />
             <br></br>
@@ -155,16 +175,14 @@ const handleSort = (sortBy) => {
             <button  style={{
               margin: 10
             }} className='btn btn-primary' onClick={() => handleSort('description')}>Sort by Description</button>
-            <TransactionTable transactions={filteredTransactions} onDelete={handleDelete} onEdit={handleEdit}/>
             {isEditFormVisible && (
               <EditedTransactionForm
               editedTransaction={editedTransaction}
               fetchTransaction={fetchTransaction}
               setIsEditFormVisible={setIsEditFormVisible}
             />
-    
             )}
-              
+            <TransactionTable transactions={filteredTransactions} onDelete={handleDelete} onEdit={handleEdit}/>
             </div>
           </Route>
           
